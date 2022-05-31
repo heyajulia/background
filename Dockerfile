@@ -13,6 +13,7 @@ RUN mkdir /app
 WORKDIR /app
 COPY --from=build --chown=nobody:nobody /app/requirements.txt .
 RUN apk add --no-cache build-base && pip install --no-cache-dir -r requirements.txt && apk del build-base
+# RUN mkdir /data && chown nobody:nobody /data
 COPY --chown=nobody:nobody main.py .
 USER nobody
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]

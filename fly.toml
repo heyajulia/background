@@ -7,6 +7,10 @@ processes = []
 [env]
 MARKET = "nl-NL"
 
+[mounts]
+source = "background_data"
+destination = "/data"
+
 [experimental]
   allowed_public_ports = []
   auto_rollback = true
