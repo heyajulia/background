@@ -16,10 +16,10 @@ app = FastAPI()
 
 
 @app.get("/")
-async def root(response_class=RedirectResponse):
-    with httpx.AsyncClient() as client:
+async def root():
+    async with httpx.AsyncClient() as client:
         response = await client.get(IMAGE_ARCHIVE_URL)
         data = response.json()
         image_url = data["images"][0]["url"]
 
-        return join_url(BING_HOSTNAME, image_url)
+        return RedirectResponse(join_url(BING_HOSTNAME, image_url))
